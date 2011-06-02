@@ -1,4 +1,4 @@
-
+require 'rubygems'
 require 'lib/net/sshd'
 
 host = '127.0.0.1'
@@ -9,7 +9,9 @@ stderr = $stderr
 Thread.new do
   Thread.abort_on_exception = true
   Thread.pass
-  Net::SSHD.start( host, port )
+  EM.run do
+    Net::SSHD.start( host, port )
+  end
 end
 
 ssh_cmd = "ssh #{host} -p #{port} test"
