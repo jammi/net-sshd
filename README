@@ -22,6 +22,11 @@ References:
  - SSH Connection Layer RFC: http://www.ietf.org/rfc/rfc4254.txt
  - SSH Authentication Procotol RFC: http://www.ietf.org/rfc/rfc4252.txt
 
+Dependencies:
+ gem install net-ssh
+ gem install eventmachine
+ gem install hexy
+
 Testing:
  ruby test/test.rb
 
