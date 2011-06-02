@@ -1,0 +1,28 @@
+
+Ruby Net::SSHD aims to be a generic SSH protocol server to be used as a
+listener providing a transport layer for SSH connections.
+
+The intent is to use it as a secure replacement for insecure plain text
+TCP socket listeners to serve any arbitary "telnet" protocol encapsulated
+in the ssh transport, preferrably supporting only public key authentication.
+
+At this stage, it's just a crude hack worth a few hours of code and barely
+handles the first stages of the handshake, so feel free to fork and contribute
+patches.
+
+It would be nice to reuse as much of Net::SSH as possible.
+
+The end goal would be to provide a full SSH implementation in Ruby, similar to
+the Erlang SSH library, which also provides a daemon in addition to just the
+client libraries.
+
+References:
+ - Erlang SSH library: http://www.erlang.org/doc/apps/ssh/
+ - SSH Transport Layer RFC: http://www.ietf.org/rfc/rfc4253.txt
+ - SSH Connection Layer RFC: http://www.ietf.org/rfc/rfc4254.txt
+ - SSH Authentication Procotol RFC: http://www.ietf.org/rfc/rfc4252.txt
+
+Testing:
+ ruby test/test.rb
+
+-- Juha-Jarmo Heinonen <o@sorsacode.com> 2011-06-02
