@@ -24,12 +24,16 @@ require 'rubygems'
 require 'randgen'
 require 'net/ssh'
 require 'eventmachine'
+require 'hexy'
 
 module Net
   module SSHD
     RAND_GEN = RandGen.new( 4096 )
     PROTO_VERSION = "SSH-2.0-Ruby/Net::SSHD_#{Net::SSH::Version::CURRENT} #{RUBY_PLATFORM}"
     class Listener < EM::Connection
+      def hexy( str )
+        puts Hexy.new(str).to_s
+      end
       def if_is_ssh
         if @buffer.start_with?('SSH-2.0-')
           @is_ssh = true
@@ -65,10 +69,12 @@ module Net
         puts "-"*80
         puts "packet length: #{@payload.bytesize} vs #{n1}"
         puts "padding length: #{random_padding.bytesize} vs #{n2}"
-        puts "payload: #{@payload.inspect}"
+        puts "payload:"
+        hexy @payload
         ssh_msg_kexinit = @payload.slice!(0..1)
         cookie = @payload.slice!(0..16)
-        puts "cookie: #{cookie.inspect}"
+        puts "cookie:"
+        hexy cookie
         # puts "random padding: #{random_padding.inspect}"
         # puts "random padding2: #{random_padding2.inspect}"
         # m = @payload.slice!(0..1).unpack('C').first
