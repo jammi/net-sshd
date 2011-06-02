@@ -29,5 +29,6 @@ Dependencies:
 
 Testing:
  ruby test/test.rb
+ ssh localhost -p 8022
 
 -- Juha-Jarmo Heinonen <o@sorsacode.com> 2011-06-02

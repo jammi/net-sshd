@@ -2,7 +2,7 @@ require 'rubygems'
 require 'lib/net/sshd'
 
 host = '127.0.0.1'
-port = 10022
+port = 8022
 puts "Starting listener on #{host}:#{port}"
 stdout = $stdout
 stderr = $stderr
