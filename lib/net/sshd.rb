@@ -88,9 +88,7 @@ module Net
         end
       end
       def timeout_initial
-        Thread.new do
-          Thread.abort_on_exception = true
-          sleep 1
+        EM::add_timer( 1 ) do
           @close_conn = ( not @received_header )
         end
       end
@@ -109,14 +107,12 @@ module Net
         setup_vars
         send_version
         timeout_initial
-        Thread.new do
-          Thread.abort_on_exception = true
-          until @close_conn
-            print "."
-            process_packets
-            sleep 0.2
+        EM::add_periodic_timer( 0.2 ) do
+          print "."
+          process_packets
+          if @close_conn
+            bye
           end
-          bye
         end
       end
       def bye( delay_ms=0 )
